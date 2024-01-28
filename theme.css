@@ -1,0 +1,468 @@
+:root {
+  --dark-violet: #7a207d;
+  --light-violet: #cf5fd3;
+  --white: rgb(255, 255, 255);
+  --light-white: rgb(220, 220, 220);
+  --light-black: rgba(0, 0, 0, 0.2);
+  --medium-black: rgba(0, 0, 0, 0.3);
+  --dark-black: rgba(0, 0, 0, 0.4);
+  --black-black: rgba(0, 0, 0, 0.5);
+}
+
+:root {
+  --color-bg-app: var(--black-black);
+  --color-main: var(--dark-violet);
+  --color-submain: var(--light-violet);
+  --color-important-1: var(--white);
+  --color-important-2: var(--light-white);
+  --color-text-hover: var(--light-white);
+  --color-bg: var(--light-black);
+  --color-bg-hover: var(--medium-black);
+  --color-panel: var(--dark-black);
+  --color-top-stripe: var(--medium-black);
+  --color-scrollbar-thumb: var(--black-black);
+}
+
+:root {
+  --border-radius: 0.35em;
+  --blur: 10px;
+  --box-shadow-header: 0 1px var(--color-main);
+}
+
+/**** Приложение ****/
+
+/* Фоновое изображение */
+#app-mount {
+  background: url("https://i.ibb.co/MBW8wg2/J9i269xv18c.jpg") center/cover
+    no-repeat;
+}
+
+/* Изменение прозрачности фонового изображения */
+#app-mount:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-bg-app);
+}
+
+/******** Чистка background ********/
+
+/**** Приложение ****/
+
+/* Приложение, список серверов, задний фон (а-ля край верхней полоски) */
+div[class^="app_"],
+nav[class*="guilds_"],
+div[class^="bg_"] {
+  background: transparent;
+}
+
+/**** Сервер ****/
+
+/* Голосовые и текстовые каналы (sidebar) */
+div[class^="sidebar_"],
+div[class^="sidebar_"] > nav[class^="container_"],
+section[class^="panels_"] :is(div[class^="panel_"], div[class^="container_"]) {
+  background: transparent;
+}
+
+/* Чат (chat) */
+div[class^="chat_"],
+div[class^="chat_"] > section[class^="title_"],
+div[class^="chat_"] div[class^="container_"],
+main[class^="chatContent_"],
+div[class^="members_"],
+div[class^="member_"] {
+  /* Есть online и offline */
+  background: transparent;
+}
+
+/* Лоудер для чата */
+ol[class^="scrollerInner_"] div[class^="wrapper_"] {
+  background: transparent;
+}
+
+/******** Красота ********/
+
+/* Общие правила */
+svg[class^="icon_"] {
+  color: var(--color-submain) !important;
+}
+
+/**** Сервер ****/
+
+/* Верхняя полоса приложения */
+#app-mount > div[class*="titleBar_"] {
+  margin-top: 0;
+  padding-top: 4px;
+  background-color: var(--color-top-stripe);
+  border-bottom: solid 2px var(--color-main);
+}
+
+div[class^="sidebar_"] {
+  border-radius: 0 !important;
+}
+
+/*** 1. Sidebar ***/
+
+/** 1.1 Header **/
+
+/* 1.1.1 Style */
+
+div[class^="sidebar_"]
+  > nav
+  :is(div[class^="headerContent_"], div[class^="headerChildren_"]) {
+  color: var(--color-important-1);
+}
+
+div[class^="sidebar_"] > nav header {
+  box-shadow: var(--box-shadow-header);
+}
+
+/* 1.1.2 Hover */
+
+div[class^="sidebar_"] > nav header:hover {
+  background-color: var(--color-bg-hover) !important;
+}
+
+/** 1.2 Channels, Events **/
+
+/* 1.2.1 Style */
+
+/* Scrollbar */
+#channels::-webkit-scrollbar-thumb {
+  background-color: var(--black-black);
+}
+
+/* Общий дефолтный цвет */
+li[class^="containerDefault_"]
+  :is(h3, svg, div[class^="name_"], div[class*="statusText_"]),
+li[class^="containerDefault_"]
+  div[class*="modeSelected_"]:hover
+  svg[class^="icon_"] {
+  color: var(--color-submain);
+}
+
+/* Группа каналов */
+li[class^="containerDefault_"] > div[class*="wrapperCommon_"] {
+  border-radius: var(--border-radius);
+  background-color: var(--color-main);
+}
+
+li[class^="containerDefault_"]:has(> div[class*="wrapperCommon_"]) {
+  margin-bottom: 5px;
+}
+
+/* Общее */
+li[class^="containerDefault_"][data-list-item-id],
+li[class^="containerDefault_"] div[class*="type"] > div {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+  backdrop-filter: blur(var(--blur));
+}
+
+/* Голосовые каналы */
+li[class^="containerDefault_"]:has(> div[class*="listDefault_"])
+  div[class*="typeVoice_"] {
+  padding-bottom: 0;
+}
+
+li[class^="containerDefault_"]:has(> div[class*="listDefault_"])
+  div[class*="typeVoice_"]
+  > div {
+  border-radius: var(--border-radius) var(--border-radius) 0
+    var(--border-radius);
+}
+
+/* Участники голосового канала */
+li[class^="containerDefault_"] > div[class*="listDefault_"] > div {
+  background-color: var(--color-bg);
+  backdrop-filter: blur(var(--blur));
+}
+
+/* TODO: Подумать над цветом */
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  > div
+  div[class^="usernameFont_"] {
+  color: var(--color-submain);
+}
+
+/* Фикс высоты блока участника голосового канала */
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  div[class^="content_"] {
+  height: 100%;
+}
+
+/* Убирание отступа между участниками голосового канала */
+div[class^="voiceUser_"] > div {
+  margin: 0;
+}
+
+/* Последний участник голосового канала */
+li[class^="containerDefault_"] > div[class*="listDefault_"] > div:last-child,
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  > div:last-child
+  div[class^="content_"] {
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+/* 1.2.2 Hover & Select */
+
+/* Общее */
+li[class^="containerDefault_"][data-list-item-id]:hover > div,
+li[class^="containerDefault_"] div[class*="modeSelected_"] a,
+li[class^="containerDefault_"] div[class*="wrapper_"]:hover a,
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  > div:hover
+  [class^="content_"] {
+  background-color: var(--color-bg-hover) !important;
+}
+
+/* Голосовой канал при наличии участников в нём */
+li[class^="containerDefault_"] div[class*="modeSelected_"] a,
+li[class^="containerDefault_"]:has(> div[class*="listDefault_"])
+  div[class*="wrapper_"]:hover
+  a {
+  border-radius: var(--border-radius) var(--border-radius) 0
+    var(--border-radius);
+}
+
+/* Участник голосового канала */
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  > div:hover
+  div[class^="content_"] {
+  border-radius: 0;
+}
+
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  > div:last-child:hover
+  div[class^="content_"] {
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  > div:hover
+  div[class^="usernameFont_"] {
+  color: var(--color-text-hover);
+}
+
+/* Цвет названия канала, мероприятия и иконок */
+li[class^="containerDefault_"][data-list-item-id]
+  > div:hover
+  div[class^="name_"],
+li[class^="containerDefault_"]
+  > div[class*="wrapper_"]:hover
+  :is(h3, div[class^="mainContent_"] > svg),
+li[class^="containerDefault_"]
+  div[class*="wrapper_"]:not(
+    [class*="modeSelected_"],
+    [class*="modeConnected_"]
+  ):hover
+  div[class^="name_"],
+li[class^="containerDefault_"]
+  div[class^="statusDiv_"]:hover
+  > :is(div[class*="statusText_"], svg),
+li[class*="containerDefault_"] svg:not([class^="icon_"]):hover {
+  color: var(--color-text-hover);
+}
+
+/* Цвет названия selected канала и голосового, в котором сидит пользователь */
+li[class^="containerDefault_"]
+  :is(div[class*="modeConnected_"], div[class*="modeSelected_"])
+  div[class^="name_"] {
+  color: var(--color-important-1);
+}
+
+/* 1.2.3 Effects */
+
+/* Эффект глянца (блика) для мероприятий и каналов */
+li[class^="containerDefault_"][data-list-item-id] > div:after,
+li[class^="containerDefault_"]
+  :is(div[class*="type"], div[class*="listDefault_"])
+  > div:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* animation: shine 10s infinite ease; */
+  filter: blur(var(--blur));
+  background: linear-gradient(
+    40deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  30% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* 1.2.4 Other */
+div[class^="sectionDivider_"] {
+  background-color: var(--color-main);
+}
+
+/** 1.3 Panels **/
+
+/* 1.3.1 Style */
+
+/* TODO: Подумать над цветом фона */
+section[class^="panels_"] {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  background-color: var(--dark-black);
+  backdrop-filter: blur(var(--blur));
+}
+
+/*TODO: Подумать над цветом кнопок */
+section[class^="panels_"]
+  > :is(div[class^="wrapper_"])
+  :is(a > div, button:not([class*="rtcConnectionStatusConnected_"])),
+section[class^="panels_"]
+  > :is(div[class^="panel_"], div[class^="container_"])
+  button {
+  color: var(--color-submain);
+}
+
+/* Game Panel */
+section[class^="panels_"] > div[class^="panel_"] div[class^="info_"] > div {
+  color: var(--white);
+  font-weight: 500;
+}
+
+section[class^="panels_"] div[class^="actionButtons_"] button {
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+}
+
+/* Точка над активностями */
+section[class^="panels_"] > div[class^="wrapper_"] button > div > span {
+  background-color: var(--color-submain);
+  transition: background-color 0.2s ease;
+}
+
+/* Кнопка настроек */
+section[class^="panels_"] > div[class^="container_"] button:last-child path {
+  fill: var(--color-submain);
+}
+
+/* Горизонтальные полоски */
+section[class^="panels_"] > div[class^="panel_"],
+section[class^="panels_"] > div[class^="wrapper_"] > div {
+  border-color: var(--color-main);
+}
+
+/* Имя */
+section[class^="panels_"] div[class^="panelTitleContainer_"] > div {
+  color: var(--color-important-1);
+  font-weight: 500;
+}
+
+/* Текст под именем */
+section[class^="panels_"] div[class^="panelSubtextContainer_"] > div {
+  color: var(--color-important-2);
+}
+
+/* 1.3.2 Hover */
+
+/* Общее */
+section[class^="panels_"]
+  > :is(div[class^="panel_"], div[class^="wrapper_"], div[class^="container_"])
+  button:not([class*="rtcConnectionStatusConnected_"]):hover {
+  color: var(--color-text-hover);
+  background-color: var(--color-bg-hover);
+}
+
+/* Точка над активностями */
+section[class^="panels_"] > div[class^="wrapper_"] button:hover > div > span {
+  background-color: var(--color-text-hover);
+}
+
+/* Аватар */
+section[class^="panels_"] div[class^="avatarWrapper_"]:hover {
+  background-color: var(--color-bg-hover);
+}
+
+/* Кнопка настроек */
+section[class^="panels_"]
+  > div[class^="container_"]
+  button:last-child:hover
+  path {
+  fill: var(--color-text-hover);
+}
+
+/*** 2. Chat ***/
+
+/** 2.1 Header **/
+
+/* 2.1.1 Style */
+
+/* Название канала */
+div[class^="chat_"] > section h1 {
+  color: var(--color-important-1);
+}
+
+/* Вертикальная полоса в титуле */
+div[class^="chat_"] > section div[class^="children_"]::after {
+  background: none;
+}
+
+div[class^="chat_"] > section {
+  box-shadow: var(--box-shadow-header);
+}
+
+/** 2.2 Content **/
+
+/* 2.2.1 Style */
+
+div[class^="chat_"] > div[class^="content_"]:before {
+  display: none;
+}
+
+div[class^="chat_"]
+  div[class^="toolbar_"]
+  div[class^="searchBar_"] {
+    background-color: var(--color-main);
+  }
+
+div[class^="public-DraftEditorPlaceholder-root"] {
+    color: var(--color-submain) !important;
+}
+/* 2.2.2 Hover */
+
+/* Кнопки */
+div[class^="chat_"]
+  div[class^="toolbar_"]
+  > :not([class^="search_"])
+  svg:hover {
+  color: var(--color-text-hover) !important;
+}
