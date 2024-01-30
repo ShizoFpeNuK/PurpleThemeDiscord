@@ -89,9 +89,15 @@ ol[class^="scrollerInner_"] div[class^="wrapper_"] {
 
 /******** Красота ********/
 
-/* Общие правила */
-svg[class^="icon_"] {
-  color: var(--color-submain) !important;
+/**** Список серверов ****/
+
+div[class^="guildSeparator_"],
+nav[class*="guilds_"] div[data-list-item-id="guildsnav___home"] > div {
+  background-color: var(--color-main);
+}
+
+nav[class*="guilds_"] div[data-list-item-id][class*="selected_"] > div {
+  background-color: var(--color-submain);
 }
 
 /**** Сервер ****/
@@ -124,10 +130,62 @@ div[class^="sidebar_"] > nav header {
   box-shadow: var(--box-shadow-header);
 }
 
-/* 1.1.2 Hover */
+/* TODO: Подумать над цветом текста и svg */
+/* Модалка при клике на header */
+#guild-header-popout div[role="separator"] {
+  border-color: var(--color-main);
+}
 
-div[class^="sidebar_"] > nav header:hover {
+#guild-header-popout {
+  border-radius: var(--border-radius);
+  background: rgb(5, 5, 5);
+  box-shadow: 0 0 15px 1px var(--color-main);
+}
+
+#guild-header-popout
+  div[class^="item_"]:not([id*="leave"], [id*="invite-people"]) {
+  color: var(--color-important-2);
+}
+
+#guild-header-popout
+  div[class^="item_"]:not([id*="leave"], [id*="invite-people"])
+  svg {
+  color: var(--color-submain);
+}
+
+/* 1.1.2 Hover & Select */
+
+div[class^="sidebar_"] > nav header:hover,
+div[class^="sidebar_"] > nav > div[class*="selected_"] > header {
   background-color: var(--color-bg-hover) !important;
+}
+
+/* Модалка при клике на header */
+#guild-header-popout div[class*="focused_"] {
+  color: var(--color-important-1) !important;
+  background-color: var(--color-main);
+}
+
+#guild-header-popout div[class*="focused_"][id*="leave"] {
+  background-color: rgb(182, 11, 51);
+}
+
+#guild-header-popout div[class*="focused_"] svg {
+  color: var(--color-important-1) !important;
+}
+
+/* Скрывание заглушенных каналов */
+#guild-header-popout div[class*="item_"][aria-checked="true"] path:first-child,
+#guild-header-popout
+  div[class*="focused_"][aria-checked="true"]
+  path:last-of-type {
+  color: var(--color-submain);
+}
+
+#guild-header-popout
+  div[class*="focused_"][aria-checked="true"]
+  path:first-child {
+  color: var(--color-important-1);
 }
 
 /** 1.2 Channels, Events **/
@@ -370,6 +428,12 @@ section[class^="panels_"] > div[class^="wrapper_"] button > div > span {
   transition: background-color 0.2s ease;
 }
 
+section[class^="panels_"]
+  div[class^="actionButtons_"]
+  button[class*="buttonActive_"] {
+  background-color: var(--color-main);
+}
+
 /* Кнопка настроек */
 section[class^="panels_"] > div[class^="container_"] button:last-child path {
   fill: var(--color-submain);
@@ -422,9 +486,18 @@ section[class^="panels_"]
 
 /*** 2. Chat ***/
 
+/* Все иконки */
+div[class^="chat_"] svg[class^="icon_"] {
+  color: var(--color-submain);
+}
+
 /** 2.1 Header **/
 
 /* 2.1.1 Style */
+
+div[class^="chat_"] > div[class^="content_"]:before {
+  display: none;
+}
 
 /* Название канала */
 div[class^="chat_"] > section h1 {
@@ -436,28 +509,21 @@ div[class^="chat_"] > section div[class^="children_"]::after {
   background: none;
 }
 
+/* Search */
+div[class^="chat_"] div[class^="toolbar_"] div[class^="searchBar_"] {
+  background-color: var(--color-main);
+}
+
+div[class^="public-DraftEditorPlaceholder-root"] {
+  color: var(--color-submain) !important;
+}
+
+/* Нижняя граница */
 div[class^="chat_"] > section {
   box-shadow: var(--box-shadow-header);
 }
 
-/** 2.2 Content **/
-
-/* 2.2.1 Style */
-
-div[class^="chat_"] > div[class^="content_"]:before {
-  display: none;
-}
-
-div[class^="chat_"]
-  div[class^="toolbar_"]
-  div[class^="searchBar_"] {
-    background-color: var(--color-main);
-  }
-
-div[class^="public-DraftEditorPlaceholder-root"] {
-    color: var(--color-submain) !important;
-}
-/* 2.2.2 Hover */
+/* 2.1.2 Hover & Select */
 
 /* Кнопки */
 div[class^="chat_"]
@@ -465,4 +531,58 @@ div[class^="chat_"]
   > :not([class^="search_"])
   svg:hover {
   color: var(--color-text-hover) !important;
+}
+
+div[class^="chat_"] div[class^="toolbar_"] div[class*="selected_"] > svg {
+  color: var(--color-important-1);
+}
+
+/** 2.2 Content **/
+
+/* 2.2.1 Style */
+
+/* Заголовок чата */
+div[class^="chat_"]
+  > div[class^="content_"]
+  ol
+  > div[class^="container_"]
+  > h3 {
+  color: var(--color-important-1);
+}
+
+/* Описание чата */
+div[class^="chat_"]
+  > div[class^="content_"]
+  ol
+  > div[class^="container_"]
+  > div[class*="description_"] {
+  color: var(--color-important-2);
+}
+
+/* Настройки ленты чата */
+div[class^="chat_"] > div[class^="content_"] ol {
+  padding-left: 16px;
+}
+
+div[class^="chat_"] > div[class^="content_"] li {
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+}
+
+div[class^="chat_"] > div[class^="content_"] li > div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+div[class^="chat_"]
+  > div[class^="content_"]
+  li:has(> :not(div[class*="groupStart_"])) {
+  margin-top: 2px;
+}
+
+/* 2.2.2 Hover & Select */
+
+/* Настройки ленты чата */
+div[class^="chat_"] > div[class^="content_"] li:hover {
+  background-color: var(--color-bg-hover);
 }
