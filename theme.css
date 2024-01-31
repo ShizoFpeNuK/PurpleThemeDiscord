@@ -347,48 +347,6 @@ li[class^="containerDefault_"]
   color: var(--color-important-1);
 }
 
-/* 1.2.3 Effects */
-
-/* Эффект глянца (блика) для мероприятий и каналов */
-li[class^="containerDefault_"][data-list-item-id] > div:after,
-li[class^="containerDefault_"]
-  :is(div[class*="type"], div[class*="listDefault_"])
-  > div:before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  /* animation: shine 10s infinite ease; */
-  filter: blur(var(--blur));
-  background: linear-gradient(
-    40deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0) 55%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-@keyframes shine {
-  0% {
-    left: -100%;
-  }
-  30% {
-    left: 100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-/* 1.2.4 Other */
-div[class^="sectionDivider_"] {
-  background-color: var(--color-main);
-}
-
 /** 1.3 Panels **/
 
 /* 1.3.1 Style */
@@ -541,43 +499,75 @@ div[class^="chat_"] div[class^="toolbar_"] div[class*="selected_"] > svg {
 
 /* 2.2.1 Style */
 
+/* Scroll */
+div[class^="chat_"] div[class^="scroller_"]::-webkit-scrollbar-track {
+  background-color: var(--color-main);
+}
+
+div[class^="chat_"] div[class^="scroller_"]::-webkit-scrollbar-thumb {
+  background-color: var(--color-submain);
+}
+
+/* Картинка пустого чата */
+div[class^="chat_"] ol div[class^="emptyChannelIcon_"] {
+  background-color: var(--color-bg);
+}
+
+div[class^="chat_"] ol div[class^="emptyChannelIcon_"] path {
+  fill: var(--color-submain);
+}
+
 /* Заголовок чата */
-div[class^="chat_"]
-  > div[class^="content_"]
-  ol
-  > div[class^="container_"]
-  > h3 {
+div[class^="chat_"] ol > div[class^="container_"] > h3 {
   color: var(--color-important-1);
 }
 
 /* Описание чата */
-div[class^="chat_"]
-  > div[class^="content_"]
-  ol
-  > div[class^="container_"]
-  > div[class*="description_"] {
+div[class^="chat_"] ol > div[class^="container_"] > div[class*="description_"] {
   color: var(--color-important-2);
 }
 
-/* Настройки ленты чата */
-div[class^="chat_"] > div[class^="content_"] ol {
-  padding-left: 16px;
-}
-
-div[class^="chat_"] > div[class^="content_"] li {
+/* Кнопки */
+div[class^="chat_"] ol div[class^="buttonContainer_"] > button {
+  padding: 6px 10px;
+  color: var(--color-submain);
   border-radius: var(--border-radius);
   background-color: var(--color-bg);
 }
 
-div[class^="chat_"] > div[class^="content_"] li > div {
+/* Настройки ленты чата */
+div[class^="chat_"] ol {
+  padding-left: 16px;
+}
+
+div[class^="chat_"] ol > li {
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+}
+
+div[class^="chat_"] ol > li > div {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-div[class^="chat_"]
-  > div[class^="content_"]
-  li:has(> :not(div[class*="groupStart_"])) {
+div[class^="chat_"] ol > li:has(> :not(div[class*="groupStart_"])) {
   margin-top: 2px;
+}
+
+/* Дата внутри сообщения */
+div[class^="chat_"] ol > li h3 > span[class^="timestamp_"] > time {
+  color: var(--color-important-2);
+}
+
+/* Дата посреди ленты */
+div[class^="chat_"] ol div[class^="divider_"] {
+  border-color: var(--color-main);
+}
+
+div[class^="chat_"] ol div[class^="divider_"] > span {
+  padding: 2px 6px;
+  color: var(--color-submain);
+  background-color: var(--color-main);
 }
 
 /* 2.2.2 Hover & Select */
@@ -585,4 +575,81 @@ div[class^="chat_"]
 /* Настройки ленты чата */
 div[class^="chat_"] > div[class^="content_"] li:hover {
   background-color: var(--color-bg-hover);
+}
+
+/** 2.3 TextArea **/
+
+/* 2.3.1 Style */
+
+/* Полоса перед полем ввода */
+div[class^="chat_"] form {
+  margin-top: 0;
+}
+
+div[class^="chat_"] form > div[class^="channelTextArea_"] {
+  padding-top: 10px;
+  border-radius: 0;
+  border-top: solid 1px var(--color-main);
+}
+
+/* Поле ввода */
+div[class^="chat_"] form:before {
+  display: none;
+}
+
+div[class^="chat_"] form > div {
+  background-color: transparent;
+}
+
+div[class^="chat_"] form > div > div {
+  background-color: var(--color-bg);
+}
+
+div[class^="chat_"] form div[class^="placeholder_"] {
+  color: var(--color-important-2);
+}
+
+div[class^="chat_"] form span[data-slate-string="true"] {
+  color: var(--color-important-1);
+}
+
+/* Кнопка добавления файлов*/
+div[class^="chat_"] form div[class^="attachWrapper_"] path {
+  fill: var(--color-submain);
+}
+
+/* Кнопки справа от поля ввода */
+div[class^="chat_"] form div[class^="buttons_"] button svg {
+  color: var(--color-submain);
+}
+
+/* Кнопка эмодзи */
+div[class^="chat_"] form div[class^="sprite_"]:last-child {
+  background-color: var(--color-submain);
+}
+
+/* 2.3.2 Hover & Select */
+
+/* Кнопки */
+div[class^="chat_"] ol div[class^="buttonContainer_"] > button:hover {
+  color: var(--color-text-hover);
+  background-color: var(--color-bg-hover);
+}
+
+/* Поле ввода */
+div[class^="chat_"] form div[class^="attachWrapper_"] button:hover path {
+  fill: var(--color-text-hover);
+}
+
+/* Кнопки справа от поля ввода */
+div[class^="chat_"] form div[class^="buttons_"] button:hover svg {
+  color: var(--color-text-hover);
+}
+
+/** 2.4 Loader content **/
+
+/* 2.3.1 Style */
+
+div[class^="sectionDivider_"] {
+  background-color: var(--color-main);
 }
