@@ -53,8 +53,6 @@
 
 /******** Чистка background ********/
 
-/**** Приложение ****/
-
 /* Приложение, список серверов, задний фон (а-ля край верхней полоски) */
 div[class^="app_"],
 nav[class*="guilds_"],
@@ -62,28 +60,27 @@ div[class^="bg_"] {
   background: transparent;
 }
 
-/**** Сервер ****/
-
-/* Голосовые и текстовые каналы (sidebar) */
+/* Голосовые и текстовые каналы, sidebar личных сообщений */
 div[class^="sidebar_"],
-div[class^="sidebar_"] > nav[class^="container_"],
+div[class^="sidebar_"] > nav,
+div[class^="sidebar_"] > nav > div[class^="scroller_"],
 section[class^="panels_"] :is(div[class^="panel_"], div[class^="container_"]) {
-  background: transparent;
+  background: transparent !important;
 }
 
-/* Чат (chat) */
+/* Личные сообщения */
+div[class^="sidebar_"] + main,
+div[class^="sidebar_"] + main > section {
+  background: transparent !important;
+}
+
+/* Чат */
 div[class^="chat_"],
 div[class^="chat_"] > section[class^="title_"],
 div[class^="chat_"] div[class^="container_"],
 main[class^="chatContent_"],
 div[class^="members_"],
 div[class^="member_"] {
-  /* Есть online и offline */
-  background: transparent;
-}
-
-/* Лоудер для чата */
-ol[class^="scrollerInner_"] div[class^="wrapper_"] {
   background: transparent;
 }
 
@@ -130,62 +127,11 @@ div[class^="sidebar_"] > nav header {
   box-shadow: var(--box-shadow-header);
 }
 
-/* TODO: Подумать над цветом текста и svg */
-/* Модалка при клике на header */
-#guild-header-popout div[role="separator"] {
-  border-color: var(--color-main);
-}
-
-#guild-header-popout {
-  border-radius: var(--border-radius);
-  background: rgb(5, 5, 5);
-  box-shadow: 0 0 15px 1px var(--color-main);
-}
-
-#guild-header-popout
-  div[class^="item_"]:not([id*="leave"], [id*="invite-people"]) {
-  color: var(--color-important-2);
-}
-
-#guild-header-popout
-  div[class^="item_"]:not([id*="leave"], [id*="invite-people"])
-  svg {
-  color: var(--color-submain);
-}
-
 /* 1.1.2 Hover & Select */
 
 div[class^="sidebar_"] > nav header:hover,
 div[class^="sidebar_"] > nav > div[class*="selected_"] > header {
   background-color: var(--color-bg-hover) !important;
-}
-
-/* Модалка при клике на header */
-#guild-header-popout div[class*="focused_"] {
-  color: var(--color-important-1) !important;
-  background-color: var(--color-main);
-}
-
-#guild-header-popout div[class*="focused_"][id*="leave"] {
-  background-color: rgb(182, 11, 51);
-}
-
-#guild-header-popout div[class*="focused_"] svg {
-  color: var(--color-important-1) !important;
-}
-
-/* Скрывание заглушенных каналов */
-#guild-header-popout div[class*="item_"][aria-checked="true"] path:first-child,
-#guild-header-popout
-  div[class*="focused_"][aria-checked="true"]
-  path:last-of-type {
-  color: var(--color-submain);
-}
-
-#guild-header-popout
-  div[class*="focused_"][aria-checked="true"]
-  path:first-child {
-  color: var(--color-important-1);
 }
 
 /** 1.2 Channels, Events **/
@@ -224,6 +170,11 @@ li[class^="containerDefault_"] div[class*="type"] > div {
   border-radius: var(--border-radius);
   background-color: var(--color-bg);
   backdrop-filter: blur(var(--blur));
+}
+
+/* Горизонтальная полоса после Мероприятия */
+div[class^="sectionDivider_"] {
+  background-color: var(--color-main);
 }
 
 /* Голосовые каналы */
@@ -414,7 +365,7 @@ section[class^="panels_"] div[class^="panelSubtextContainer_"] > div {
   color: var(--color-important-2);
 }
 
-/* 1.3.2 Hover */
+/* 1.3.2 Hover & Select */
 
 /* Общее */
 section[class^="panels_"]
@@ -535,30 +486,6 @@ div[class^="chat_"] ol div[class^="buttonContainer_"] > button {
   background-color: var(--color-bg);
 }
 
-/* Настройки ленты чата */
-div[class^="chat_"] ol {
-  padding-left: 16px;
-}
-
-div[class^="chat_"] ol > li {
-  border-radius: var(--border-radius);
-  background-color: var(--color-bg);
-}
-
-div[class^="chat_"] ol > li > div {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-div[class^="chat_"] ol > li:has(> :not(div[class*="groupStart_"])) {
-  margin-top: 2px;
-}
-
-/* Дата внутри сообщения */
-div[class^="chat_"] ol > li h3 > span[class^="timestamp_"] > time {
-  color: var(--color-important-2);
-}
-
 /* Дата посреди ленты */
 div[class^="chat_"] ol div[class^="divider_"] {
   border-color: var(--color-main);
@@ -570,11 +497,68 @@ div[class^="chat_"] ol div[class^="divider_"] > span {
   background-color: var(--color-main);
 }
 
+/* Настройки ленты чата */
+div[class^="chat_"] ol {
+  padding-left: 16px;
+}
+
+div[class^="chat_"] ol > li {
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+}
+
+div[class^="chat_"] ol > li > div {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+div[class^="chat_"] ol > li:has(> :not(div[class*="groupStart_"])) {
+  margin-top: 2px;
+}
+
+/* Дата внутри сообщения */
+div[class^="chat_"] ol > li span[class*="timestamp_"] > time {
+  color: var(--color-important-2);
+}
+
+/* Реакции внутри сообщения */
+div[class^="chat_"] ol > li div[class^="reaction_"] {
+  background-color: var(--color-main);
+}
+
+div[class^="chat_"] ol > li div[class*="reactionCount_"] {
+  color: var(--color-submain);
+}
+
+/* Article */
+div[class^="chat_"] ol > li article {
+  background-color: var(--color-bg);
+  border-color: var(--color-main) !important;
+}
+
 /* 2.2.2 Hover & Select */
 
 /* Настройки ленты чата */
 div[class^="chat_"] > div[class^="content_"] li:hover {
   background-color: var(--color-bg-hover);
+}
+
+/* Реакции внутри сообщения */
+div[class^="chat_"] ol > li div[class^="reactionBtn_"]:hover > svg {
+  color: var(--color-text-hover);
+}
+
+div[class^="chat_"] ol > li div[class*="reactionMe_"] {
+  border-color: var(--color-main);
+  background-color: var(--color-submain);
+}
+
+div[class^="chat_"]
+  ol
+  > li
+  div[class*="reaction_"]:hover
+  div[class^="reactionCount_"] {
+  color: var(--color-text-hover);
 }
 
 /** 2.3 TextArea **/
@@ -648,8 +632,258 @@ div[class^="chat_"] form div[class^="buttons_"] button:hover svg {
 
 /** 2.4 Loader content **/
 
-/* 2.3.1 Style */
+/* 2.4.1 Style */
 
-div[class^="sectionDivider_"] {
+/* Лоудер для чата */
+ol[class^="scrollerInner_"] > div[class^="wrapper_"],
+ol[class^="scrollerInner_"] > div[class^="wrapper_"] > div {
+  background-color: transparent;
+}
+
+ol[class^="scrollerInner_"]
+  > div[class^="wrapper_"]
+  :is([class^="blob_"], [class^="avatar_"], [class^="attachment_"]) {
+  background-color: var(--color-submain);
+}
+
+/** 2.5 Members **/
+
+/* 2.5.1 Style */
+
+aside[class^="membersWrap_"] h3 {
+  height: 42px;
+}
+
+aside[class^="membersWrap_"] h3 span:last-child {
+  display: block;
+  min-width: 90%;
+  padding: 1px 5px;
+  color: var(--color-submain);
+  border-radius: var(--border-radius);
   background-color: var(--color-main);
+}
+
+aside[class^="membersWrap_"] div[class^="member_"] {
+  border-radius: var(--border-radius);
+}
+
+aside[class^="membersWrap_"] div[class^="members_"]::-webkit-scrollbar-thumb {
+  background-color: var(--color-submain);
+}
+
+/* 2.5.2 Hover & Select */
+
+aside[class^="membersWrap_"] div[class^="member_"]:hover > div {
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg-hover);
+}
+
+/** 2.6 Popups **/
+
+/* Общее */
+
+#guild-header-popout,
+div[class^="layerContainer_"] div[class^="browser_"] {
+  border-radius: var(--border-radius);
+  background: rgb(5, 5, 5);
+  box-shadow: 0 0 15px 1px var(--color-main);
+}
+
+/* I. Модалка при клике на header над каналами */
+
+/* 2.6.1 Style */
+
+/* TODO: Подумать над цветом текста и svg */
+#guild-header-popout div[role="separator"] {
+  border-color: var(--color-main);
+}
+
+#guild-header-popout
+  div[class^="item_"]:not([id*="leave"], [id*="invite-people"]) {
+  color: var(--color-important-2);
+}
+
+#guild-header-popout
+  div[class^="item_"]:not([id*="leave"], [id*="invite-people"])
+  svg {
+  color: var(--color-submain);
+}
+
+/* 2.6.2 Hover & Select */
+
+#guild-header-popout div[class*="focused_"] {
+  color: var(--color-important-1) !important;
+  background-color: var(--color-main);
+}
+
+#guild-header-popout div[class*="focused_"][id*="leave"] {
+  background-color: rgb(182, 11, 51);
+}
+
+#guild-header-popout div[class*="focused_"] svg {
+  color: var(--color-important-1) !important;
+}
+
+/* Скрывание заглушенных каналов */
+#guild-header-popout div[class*="item_"][aria-checked="true"] path:first-child,
+#guild-header-popout
+  div[class*="focused_"][aria-checked="true"]
+  path:last-of-type {
+  color: var(--color-submain);
+}
+
+#guild-header-popout
+  div[class*="focused_"][aria-checked="true"]
+  path:first-child {
+  color: var(--color-important-1);
+}
+
+/* I. Модалка при клике на header над каналами */
+
+/* 2.6.1 Style */
+
+/* Header */
+div[class^="layerContainer_"] div[class^="browser_"] svg {
+  color: var(--color-submain);
+}
+
+div[class^="layerContainer_"] div[class^="browser_"] h1 {
+  color: var(--color-important-1);
+}
+
+div[class^="layerContainer_"]
+  div[class^="browser_"]
+  :is([class^="divider_"], [class^="searchBox_"]) {
+  background-color: var(--color-main);
+}
+
+div[class^="layerContainer_"] div[class^="browser_"] input::placeholder {
+  color: var(--color-submain);
+}
+
+div[class^="layerContainer_"] div[class^="browser_"] button {
+  color: var(--color-important-1);
+  background-color: var(--color-submain);
+}
+
+div[class^="layerContainer_"] div[class^="browser_"] button {
+  color: var(--color-important-1);
+  background-color: var(--color-submain);
+}
+
+/* Body */
+div[class^="layerContainer_"]
+  div[class^="browser_"]
+  div[class^="list_"]
+  div[class^="icon_"] {
+  background-color: var(--color-main);
+}
+
+div[class^="layerContainer_"] div[class^="browser_"] div[class^="list_"] h2 {
+  color: var(--color-important-1);
+}
+
+div[class^="layerContainer_"]
+  div[class^="browser_"]
+  div[class^="list_"]
+  div[class^="text-md-normal_"] {
+  color: var(--color-important-2) !important;
+}
+
+/* 2.6.2 Hover & Select */
+
+/* Header */
+div[class^="layerContainer_"] div[class^="browser_"] button:hover {
+  background-color: var(--color-main);
+}
+
+div[class^="layerContainer_"]
+  div[class^="browser_"]
+  div[class^="closeIcon_"]:hover
+  svg {
+  color: var(--color-text-hover);
+}
+
+/**** Личные сообщения ****/
+
+/*** 1. Sidebar ***/
+
+/** 1.1 Header **/
+
+/* 1.1.1 Style */
+
+nav[class^="privateChannels_"] div[class^="searchBar_"] {
+  box-shadow: var(--box-shadow-header);
+}
+
+nav[class^="privateChannels_"] button[class^="searchBarComponent_"] {
+  color: var(--color-submain);
+  background-color: var(--color-main);
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+/* 1.1.2 Hover & Select */
+
+nav[class^="privateChannels_"] button[class^="searchBarComponent_"]:hover {
+  color: var(--color-main);
+  background-color: var(--color-submain);
+}
+
+/** 1.2 Friends, Nitro, Shop **/
+
+/* 1.2.1 Style */
+
+div[class^="sidebar_"] ul > li > div[class*="linkButton_"] svg {
+  color: var(--color-submain);
+}
+
+div[class^="sidebar_"] ul > li > div {
+  color: var(--color-important-2);
+}
+
+div[class^="sidebar_"] ul div[class*="selected_"] {
+  color: var(--color-important-1);
+  background-color: var(--color-bg-hover);
+}
+
+div[class^="sidebar_"] ul > h2 {
+  height: auto;
+  padding: 4px 6px 4px 14px;
+  margin: 18px 8px 10px 0;
+  color: var(--color-submain);
+  border-radius: var(--border-radius);
+  background-color: var(--color-main);
+}
+
+div[class^="sidebar_"] ul > h2 svg {
+  color: var(--color-submain) !important;
+}
+
+/* 1.2.2 Hover & Select */
+
+div[class^="sidebar_"] ul > li > div[class*="linkButton_"]:hover svg {
+  color: var(--color-main);
+}
+
+div[class^="sidebar_"] ul > li:hover div[class^="closeButton_"] {
+  color: var(--color-important-2);
+}
+
+div[class^="sidebar_"] ul div[class*="interactive_"]:hover {
+  color: var(--color-important-2);
+  background-color: var(--color-bg-hover);
+}
+
+div[class^="sidebar_"] ul > h2 > div:hover > svg,
+div[class^="sidebar_"] ul > h2:hover {
+  color: var(--color-important-1) !important;
+}
+
+/*** 1. Main ***/
+
+/** 1.1 Header **/
+
+/* 1.1.1 Style */
+
+main > section[role="navigation"] {
 }
