@@ -267,8 +267,18 @@ li[class^="containerDefault_"]
 li[class^="containerDefault_"]
   > div[class*="listDefault_"]
   > div:hover
+  > div:not([class*="selected"]):hover
   div[class^="usernameFont_"] {
   color: var(--color-text-hover);
+}
+
+/* Selected участника голосового канала */
+li[class^="containerDefault_"]
+  > div[class*="listDefault_"]
+  div[class*="selected_"]
+  > div {
+  background-color: var(--color-bg-hover) !important;
+  border-radius: 0;
 }
 
 /* Цвет названия канала, мероприятия и иконок */
@@ -291,7 +301,7 @@ li[class*="containerDefault_"] svg:not([class^="icon_"]):hover {
   color: var(--color-text-hover);
 }
 
-/* Цвет названия selected канала и голосового, в котором сидит пользователь */
+/* Selected канала и голосового, в котором сидит пользователь */
 li[class^="containerDefault_"]
   :is(div[class*="modeConnected_"], div[class*="modeSelected_"])
   div[class^="name_"] {
@@ -833,20 +843,20 @@ nav[class^="privateChannels_"] button[class^="searchBarComponent_"]:hover {
 
 /* 1.2.1 Style */
 
-div[class^="sidebar_"] ul > li > div[class*="linkButton_"] svg {
+nav[class^="privateChannels_"] ul > li > div[class*="linkButton_"] svg {
   color: var(--color-submain);
 }
 
-div[class^="sidebar_"] ul > li > div {
+nav[class^="privateChannels_"] ul > li > div {
   color: var(--color-important-2);
 }
 
-div[class^="sidebar_"] ul div[class*="selected_"] {
+nav[class^="privateChannels_"] ul div[class*="selected_"] {
   color: var(--color-important-1);
   background-color: var(--color-bg-hover);
 }
 
-div[class^="sidebar_"] ul > h2 {
+nav[class^="privateChannels_"] ul > h2 {
   height: auto;
   padding: 4px 6px 4px 14px;
   margin: 18px 8px 10px 0;
@@ -855,27 +865,32 @@ div[class^="sidebar_"] ul > h2 {
   background-color: var(--color-main);
 }
 
-div[class^="sidebar_"] ul > h2 svg {
+nav[class^="privateChannels_"] ul > h2 svg {
   color: var(--color-submain) !important;
+}
+
+nav[class^="privateChannels_"]
+  > div[class*="scroller_"]::-webkit-scrollbar-thumb {
+  background-color: var(--color-submain);
 }
 
 /* 1.2.2 Hover & Select */
 
-div[class^="sidebar_"] ul > li > div[class*="linkButton_"]:hover svg {
+nav[class^="privateChannels_"] ul > li > div[class*="linkButton_"]:hover svg {
   color: var(--color-main);
 }
 
-div[class^="sidebar_"] ul > li:hover div[class^="closeButton_"] {
+nav[class^="privateChannels_"] ul > li:hover div[class^="closeButton_"] {
   color: var(--color-important-2);
 }
 
-div[class^="sidebar_"] ul div[class*="interactive_"]:hover {
+nav[class^="privateChannels_"] ul div[class*="interactive_"]:hover {
   color: var(--color-important-2);
   background-color: var(--color-bg-hover);
 }
 
-div[class^="sidebar_"] ul > h2 > div:hover > svg,
-div[class^="sidebar_"] ul > h2:hover {
+nav[class^="privateChannels_"] ul > h2 > div:hover > svg,
+nav[class^="privateChannels_"] ul > h2:hover {
   color: var(--color-important-1) !important;
 }
 
@@ -885,5 +900,144 @@ div[class^="sidebar_"] ul > h2:hover {
 
 /* 1.1.1 Style */
 
-main > section[role="navigation"] {
+main > section[role="navigation"] svg {
+  color: var(--color-submain) !important;
+}
+
+main > section[role="navigation"] div[class^="tabBar_"] > div {
+  color: var(--color-important-2);
+}
+
+main
+  > section[role="navigation"]
+  div[class^="tabBar_"]
+  > div[class*="selected_"] {
+  background-color: var(--color-bg-hover) !important;
+}
+
+/* Dividers */
+main > section[role="navigation"] div[class^="divider_"] {
+  background-color: var(--color-submain) !important;
+}
+
+main > section[role="navigation"] div[class^="children_"]::after {
+  background: none;
+}
+
+main > div[class^="tabBody_"]::before {
+  box-shadow: var(--box-shadow-header);
+}
+
+/* 1.1.2 Hover & Select */
+
+main
+  > section[role="navigation"]
+  div[class^="tabBar_"]
+  > div:not([class*="addFriend_"]):hover {
+  color: var(--color-important-1);
+  background-color: var(--color-bg-hover) !important;
+}
+
+main > section[role="navigation"] svg:hover {
+  color: var(--color-text-hover) !important;
+}
+
+main > section[role="navigation"] div[class*="addFriend_"]:hover {
+  color: var(--color-important-1);
+  background-color: var(--color-submain) !important;
+}
+
+/** 1.2 Friends **/
+
+/* 1.2.1 Style */
+
+main > div[class^="tabBody_"]::before {
+  box-shadow: var(--box-shadow-header);
+}
+
+/* Search Bar */
+div[class^="peopleColumn_"] > div[class*="searchBar_"] {
+  background-color: var(--color-main);
+}
+
+div[class^="peopleColumn_"] > div[class*="searchBar_"] input::placeholder,
+div[class^="peopleColumn_"] > div[class*="searchBar_"] svg {
+  color: var(--color-submain);
+}
+
+/* Заголовок */
+div[class^="peopleColumn_"] > div[class*="sectionTitle_"] > h2 {
+  color: var(--color-submain);
+}
+
+/* Scroll Bar */
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]::-webkit-scrollbar-thumb {
+  background-color: var(--color-submain);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]::-webkit-scrollbar-track {
+  background-color: var(--color-main);
+}
+
+/* Список людей в сети */
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class*="peopleListItem_"] {
+  border-color: var(--color-main);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class*="info_"]
+  > span[class^="username_"] {
+  color: var(--color-submain);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class*="info_"]
+  > span[class*="discriminator_"] {
+  color: var(--color-main);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class^="userInfo_"]
+  div[class^="text_"] {
+  color: var(--color-important-2);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class^="userInfo_"]
+  div[class^="text_"]
+  :is(strong, svg) {
+  color: var(--color-submain);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class^="actions_"]
+  > div {
+  color: var(--color-submain);
+  background-color: var(--color-main);
+}
+
+/* 1.2.2 Hover & Select */
+
+/* Список людей в сети */
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class^="peopleListItem_"]:hover {
+  background-color: var(--color-bg-hover);
+}
+
+div[class^="peopleColumn_"]
+  > div[class*="peopleList_"]
+  div[class^="actions_"]
+  > div:hover {
+  color: var(--color-text-hover);
+  background-color: var(--color-submain);
 }
